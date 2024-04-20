@@ -58,7 +58,7 @@ function Header() {
                     </div>
                 </div>
                 <div className="px-4 cursor-pointer border-l">
-                    <div className="flex items-center p-2 rounded-full text-sm relative text-teal-400">
+                    <div className="flex items-center p-2 rounded-full text-sm relative text-sky-400">
                         <svg
                             className="h-5 w-5"
                             width="24"

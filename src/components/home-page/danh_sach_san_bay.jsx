@@ -1,9 +1,35 @@
+'use client';
+
+import { useEffect } from 'react';
 import './scrollbar.css';
 
-function ListAirport({ setSanBay, sanBay, searchAirport, setSearchAirport, setSelectAirport }) {
+function DanhSachSanBay({ setSanBay, sanBay, searchAirport, setSearchAirport, setSelectAirport, href }) {
+    useEffect(() => {
+        const handleClick = (event) => {
+            let element = event.target;
+            if (
+                !(
+                    element.closest('.san-bay-di-block') ||
+                    element.closest('.san-bay-den-block') ||
+                    element.classList.contains('san-bay-di-block') ||
+                    element.classList.contains('san-bay-den-block')
+                )
+            ) {
+                setSelectAirport('Không');
+            }
+        };
+
+        window.addEventListener('click', handleClick);
+
+        return () => {
+            window.removeEventListener('click', handleClick);
+        };
+    }, []);
     return (
         <div
-            className={`absolute w-2/3 lg:w-1/3 top-full left-0 -translate-y-14 ${
+            className={`absolute w-2/3 lg:w-1/3 top-full left-0 ${
+                href && href.includes('danh-sach-ve') ? '-translate-y-4' : '-translate-y-16'
+            } ${
                 sanBay == 'Đi' ? 'translate-x-4 block' : sanBay == 'Về' ? 'translate-x-24 block' : 'hidden'
             } border rounded shadow-lg z-10 bg-white`}
         >
@@ -176,4 +202,4 @@ function ListAirport({ setSanBay, sanBay, searchAirport, setSearchAirport, setSe
     );
 }
 
-export default ListAirport;
+export default DanhSachSanBay;

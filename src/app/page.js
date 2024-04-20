@@ -1,13 +1,13 @@
-import HomePageSearchForm from '@/components/home_page/search_form';
-import AdvBar from '@/components/home_page/adv_bar';
-import ProposeTicket from '@/components/home_page/propose_ticket';
+import HomePageSearchForm from '@/components/home-page/search_form';
+import AdvBar from '@/components/home-page/adv_bar';
+import VeDeXuat from '@/components/home-page/ve_de_xuat';
 
 export default function Home() {
     return (
-        <main className="flex flex-wrap justify-center p-4">
+        <main className="flex flex-wrap justify-center p-4 pb-12">
             <HomePageSearchForm />
             <AdvBar />
-            <ProposeTicket />
+            <VeDeXuat />
         </main>
     );
 }

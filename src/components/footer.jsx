@@ -1,6 +1,6 @@
 function Footer() {
     return (
-        <div className="border-t p-4 mt-8 flex justify-between text-xs text-gray-500">
+        <div className="border-t p-4 flex justify-between text-xs text-gray-500">
             <div className="flex">
                 <div className="mr-8">
                     <span className="w-2 h-2 mr-2 inline-block rounded-full bg-gray-200"></span>

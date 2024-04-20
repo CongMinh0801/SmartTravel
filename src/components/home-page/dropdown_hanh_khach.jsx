@@ -4,7 +4,17 @@ import { useEffect } from 'react';
 import Icon from '../icon';
 import { faPerson, faChild, faBaby, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
-function DropdownHanhKhach({ nguoiLon, treEm, emBe, setNguoiLon, setTreEm, setEmBe, openHanhKhach, setOpenHanhKhach }) {
+function DropdownHanhKhach({
+    nguoiLon,
+    treEm,
+    emBe,
+    setNguoiLon,
+    setTreEm,
+    setEmBe,
+    openHanhKhach,
+    setOpenHanhKhach,
+    href,
+}) {
     useEffect(() => {
         const handleClick = (event) => {
             let element = event.target;
@@ -32,7 +42,9 @@ function DropdownHanhKhach({ nguoiLon, treEm, emBe, setNguoiLon, setTreEm, setEm
     }, [openHanhKhach]);
     return (
         <div
-            className={`hidden absolute top-full right-1/2 -translate-y-14 translate-x-32 border rounded shadow-lg z-10 bg-white p-4 dropdown-hanh-khach`}
+            className={`hidden absolute top-full right-1/2 ${
+                href && href.includes('danh-sach-ve') ? '-translate-y-4' : '-translate-y-16'
+            } translate-x-32 border rounded shadow-lg z-10 bg-white p-4 dropdown-hanh-khach`}
         >
             <h4 className="">Chọn số lượng đối tượng phù hợp</h4>
             <div className="mt-6 w-full text-gray-600">

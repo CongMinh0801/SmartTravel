@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-function ProposeTicketItem() {
+function VeDeXuatItem() {
     return (
         <div className="col-span-1 rounded-md shadow p-2">
             <div className="w-full flex justify-start">
@@ -48,4 +48,4 @@ function ProposeTicketItem() {
     );
 }
 
-export default ProposeTicketItem;
+export default VeDeXuatItem;

@@ -5,7 +5,7 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import Vietnamese from 'flatpickr/dist/l10n/vn';
 import DropdownHanhKhach from './dropdown_hanh_khach';
-import ListAirport from './list_airport';
+import DanhSachSanBay from './danh_sach_san_bay';
 
 function HomePageSearchForm() {
     const [ngayDi, setNgayDi] = useState(new Date().toISOString().split('T')[0]);
@@ -16,6 +16,7 @@ function HomePageSearchForm() {
     const [searchAirport, setSearchAirport] = useState();
     const [ngayVeMessageValidate, setNgayVeMessageValidate] = useState('');
     const [nguoiLon, setNguoiLon] = useState(1);
+    const [href, setHref] = useState(window.location.href);
     const [treEm, setTreEm] = useState(0);
     const [emBe, setEmBe] = useState(0);
     const [khuHoi, setKhuHoi] = useState(false);
@@ -66,12 +67,18 @@ function HomePageSearchForm() {
     useEffect(() => {
         const ngayVeInput = document.querySelector('#ngay-ve').nextElementSibling;
         ngayVeInput.disabled = !khuHoi;
-        ngayVeInput.style.backgroundColor = khuHoi ? 'transparent' : 'rgb(229, 231, 235)';
+        ngayVeInput.style.backgroundColor = khuHoi ? '#f8fafc' : 'rgb(229, 231, 235)';
     }, [khuHoi]);
     return (
-        <div className="w-full pt-16 pb-16 rounded-md bg-[url('/plane-background.jpg')] bg-cover p-4 relative">
-            <div className="w-full text-gray-600">
-                <h2 className="text-lg font-semibold">
+        <div
+            className={`rounded-md ${
+                href && href.includes('danh-sach-ve')
+                    ? 'bg-white h-fit p-0 w-full'
+                    : "bg-[url('/plane-background.jpg')] pt-16 pb-16 w-full"
+            } bg-cover p-4 relative`}
+        >
+            <div className={`w-full text-gray-600`}>
+                <h2 className={`text-lg font-semibold ${href && href.includes('danh-sach-ve') ? 'hidden' : 'block'}`}>
                     <i>Tìm chuyến bay</i>
                 </h2>
                 <div className="w-full text-sm">
@@ -121,12 +128,12 @@ function HomePageSearchForm() {
                                 </svg>
                             </div>
                         </div>
-                        <div className=" col-span-5 bg-transparent"></div>
+                        <div className=" col-span-5 bg-transparent border-b"></div>
                     </div>
                     <div className="w-full grid grid-cols-12 rounded-b-lg overflow-hidden rounded-tr-lg">
                         <div className="col-span-12 md:col-span-7 bg-white p-2">
                             <div className="grid grid-cols-3 gap-8">
-                                <div className="grid-col-1">
+                                <div className="grid-col-1 san-bay-di-block">
                                     <label
                                         htmlFor="san-bay-di"
                                         className="block pl-2 text-xs font-medium text-gray-900 dark:text-white"
@@ -138,7 +145,7 @@ function HomePageSearchForm() {
                                         value={sanBayDi}
                                         type="text"
                                         id="san-bay-di"
-                                        className="p-2 w-full border rounded"
+                                        className="p-2 w-full border rounded bg-gray-50 outline-none border-none font-semibold"
                                         placeholder="SGN (Hồ Chí Minh)"
                                         onClick={() => {
                                             selectAirport != 'Đi' ? setSelectAirport('Đi') : setSelectAirport(false);
@@ -146,7 +153,7 @@ function HomePageSearchForm() {
                                         required
                                     />
                                 </div>
-                                <div className="grid-col-1">
+                                <div className="grid-col-1 san-bay-den-block">
                                     <label
                                         htmlFor="san-bay-den"
                                         className="block pl-2 text-xs font-medium text-gray-900 dark:text-white"
@@ -158,7 +165,7 @@ function HomePageSearchForm() {
                                         value={sanBayDen}
                                         type="text"
                                         id="san-bay-den"
-                                        className="p-2 w-full border rounded"
+                                        className="p-2 w-full border rounded bg-gray-50 outline-none border-none font-semibold"
                                         placeholder="HAN (Hà Nội)"
                                         onClick={() => {
                                             selectAirport != 'Về' ? setSelectAirport('Về') : setSelectAirport(false);
@@ -176,7 +183,7 @@ function HomePageSearchForm() {
                                     <input
                                         type="text"
                                         id="first_name"
-                                        className="p-2 w-full outline-none border rounded"
+                                        className="p-2 w-full border rounded bg-gray-50 outline-none border-none font-semibold"
                                         placeholder="Phổ thông"
                                         required
                                         readOnly
@@ -199,7 +206,7 @@ function HomePageSearchForm() {
                                         type="datetime-local"
                                         id="ngay-di"
                                         name="ngay-di"
-                                        className="w-full p-2 outline-none border h-[38px] rounded"
+                                        className="w-full p-2 border h-[38px] rounded bg-gray-50 outline-none border-none font-semibold"
                                         readOnly
                                         value={ngayDi}
                                     />
@@ -215,7 +222,7 @@ function HomePageSearchForm() {
                                         type="datetime-local"
                                         id="ngay-ve"
                                         name="ngay-ve"
-                                        className="w-full p-2 outline-none border h-[38px] rounded bg-gray-200"
+                                        className="w-full p-2 border h-[38px] rounded bg-gray-200 outline-none border-none font-semibold"
                                         readOnly
                                         value={ngayVe}
                                         disabled={khuHoi ? false : true}
@@ -255,13 +262,15 @@ function HomePageSearchForm() {
                 setTreEm={setTreEm}
                 setEmBe={setEmBe}
                 setOpenHanhKhach={setOpenHanhKhach}
+                href={href}
             />
-            <ListAirport
+            <DanhSachSanBay
                 setSanBay={selectAirport == 'Đi' ? setSanBayDi : setSanBayDen}
                 sanBay={selectAirport}
                 searchAirport={searchAirport}
                 setSelectAirport={setSelectAirport}
                 setSearchAirport={setSearchAirport}
+                href={href}
             />
         </div>
     );
