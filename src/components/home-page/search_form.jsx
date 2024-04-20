@@ -16,7 +16,9 @@ function HomePageSearchForm() {
     const [searchAirport, setSearchAirport] = useState();
     const [ngayVeMessageValidate, setNgayVeMessageValidate] = useState('');
     const [nguoiLon, setNguoiLon] = useState(1);
-    const [href, setHref] = useState(window.location.href);
+    const router = useRouter();
+    const currentUrl = router.asPath;
+    const [href, setHref] = useState(currentUrl);
     const [treEm, setTreEm] = useState(0);
     const [emBe, setEmBe] = useState(0);
     const [khuHoi, setKhuHoi] = useState(false);
