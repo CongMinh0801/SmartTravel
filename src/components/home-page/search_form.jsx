@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState, useRouter } from 'react';
+import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import Vietnamese from 'flatpickr/dist/l10n/vn';
@@ -16,13 +17,11 @@ function HomePageSearchForm() {
     const [searchAirport, setSearchAirport] = useState();
     const [ngayVeMessageValidate, setNgayVeMessageValidate] = useState('');
     const [nguoiLon, setNguoiLon] = useState(1);
-    const router = useRouter();
-    const currentUrl = router.asPath;
-    const [href, setHref] = useState(currentUrl);
     const [treEm, setTreEm] = useState(0);
     const [emBe, setEmBe] = useState(0);
     const [khuHoi, setKhuHoi] = useState(false);
     const [openHanhKhach, setOpenHanhKhach] = useState(false);
+    const pathname = usePathname();
 
     const changeKhuHoi = () => {
         setKhuHoi(!khuHoi);
@@ -74,13 +73,17 @@ function HomePageSearchForm() {
     return (
         <div
             className={`rounded-md ${
-                href && href.includes('danh-sach-ve')
+                pathname && pathname.includes('danh-sach-ve')
                     ? 'bg-white h-fit p-0 w-full'
                     : "bg-[url('/plane-background.jpg')] pt-16 pb-16 w-full"
             } bg-cover p-4 relative`}
         >
             <div className={`w-full text-gray-600`}>
-                <h2 className={`text-lg font-semibold ${href && href.includes('danh-sach-ve') ? 'hidden' : 'block'}`}>
+                <h2
+                    className={`text-lg font-semibold ${
+                        pathname && pathname.includes('danh-sach-ve') ? 'hidden' : 'block'
+                    }`}
+                >
                     <i>Tìm chuyến bay</i>
                 </h2>
                 <div className="w-full text-sm">
@@ -264,7 +267,7 @@ function HomePageSearchForm() {
                 setTreEm={setTreEm}
                 setEmBe={setEmBe}
                 setOpenHanhKhach={setOpenHanhKhach}
-                href={href}
+                href={pathname}
             />
             <DanhSachSanBay
                 setSanBay={selectAirport == 'Đi' ? setSanBayDi : setSanBayDen}
@@ -272,7 +275,7 @@ function HomePageSearchForm() {
                 searchAirport={searchAirport}
                 setSelectAirport={setSelectAirport}
                 setSearchAirport={setSearchAirport}
-                href={href}
+                href={pathname}
             />
         </div>
     );
