@@ -1,14 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRouter } from 'react';
 import StepItem from './step_item';
 
 function Steps() {
+    const router = useRouter();
+    const currentUrl = router.asPath;
     const [currentPath, setCurrentPath] = useState('');
 
     useEffect(() => {
         // Lấy URI hiện tại khi component được render
-        setCurrentPath(window.location.pathname);
+        setCurrentPath(currentUrl);
     }, []);
 
     return (
