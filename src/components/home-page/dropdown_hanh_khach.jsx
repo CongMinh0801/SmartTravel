@@ -15,27 +15,27 @@ function DropdownHanhKhach({
     setOpenHanhKhach,
     href,
 }) {
-    useEffect(() => {
-        const handleClick = (event) => {
-            let element = event.target;
-            if (
-                !(
-                    element.closest('.dropdown-hanh-khach') ||
-                    element.closest('.dropdown-hanh-khach-input') ||
-                    element.classList.contains('dropdown-hanh-khach') ||
-                    element.classList.contains('dropdown-hanh-khach-input')
-                )
-            ) {
-                setOpenHanhKhach(false);
-            }
-        };
+    // useEffect(() => {
+    //     const handleClick = (event) => {
+    //         let element = event.target;
+    //         if (
+    //             !(
+    //                 element.closest('.dropdown-hanh-khach') ||
+    //                 element.closest('.dropdown-hanh-khach-input') ||
+    //                 element.classList.contains('dropdown-hanh-khach') ||
+    //                 element.classList.contains('dropdown-hanh-khach-input')
+    //             )
+    //         ) {
+    //             setOpenHanhKhach(false);
+    //         }
+    //     };
 
-        window.addEventListener('click', handleClick);
+    //     window.addEventListener('click', handleClick);
 
-        return () => {
-            window.removeEventListener('click', handleClick);
-        };
-    }, []);
+    //     return () => {
+    //         window.removeEventListener('click', handleClick);
+    //     };
+    // }, []);
 
     useEffect(() => {
         document.querySelector('.dropdown-hanh-khach').style.display = openHanhKhach ? 'block' : 'none';
